@@ -8,15 +8,21 @@ import EditKegForm from "./EditKegForm";
 class KegControl extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = JSON.parse(window.localStorage.getItem("state")) || {
       formVisibleOnPage: false,
       mainKegList: [],
       selectedKeg: null,
       editing: false,
-      outOfStock: false,
       searchKegList: [],
+      searching: false,
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+  }
+
+  setState(state) {
+    window.localStorage.setItem("state", JSON.stringify(state));
+    super.setState(state);
   }
 
   handleAddingNewKegToList = (newKeg) => {
@@ -33,9 +39,6 @@ class KegControl extends React.Component {
 
     if (selectedKeg.pints === 0) {
       selectedKeg.status = "Out Of Stock";
-      this.setState({
-        outOfStock: true,
-      });
     } else if (selectedKeg.pints < 10) {
       selectedKeg.status = "Almost Empty";
     }
@@ -54,7 +57,6 @@ class KegControl extends React.Component {
       formVisibleOnPage: false,
       selectedKeg: null,
       editing: false,
-      outOfStock: false,
     });
   };
 
@@ -86,13 +88,13 @@ class KegControl extends React.Component {
   };
 
   handleSearch = (search) => {
-    const searchMainKegList = this.state.mainKegList.filter((keg) => keg.name.includes(search) || keg.brand.includes(search));
+    console.log(search);
+    const searchResult = this.state.mainKegList.filter((keg) => keg.name.includes(search) || keg.brand.includes(search));
     this.setState({
-      mainKegList: searchMainKegList,
-      editing: false,
-      selectedKeg: null,
+      searchKegList: searchResult,
     });
   };
+
   handleClick = () => {
     if (this.state.selectedKeg != null) {
       this.setState({
@@ -110,6 +112,9 @@ class KegControl extends React.Component {
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
+    // const { search } = window.location;
+    // const query = new URLSearchParams(search).get("s");
+    // console.log(query);
     if (this.state.editing) {
       currentlyVisibleState = <EditKegForm keg={this.state.selectedKeg} onEditKeg={this.handleEditingKegInList} />;
       buttonText = "Return to Keg List";
@@ -119,11 +124,13 @@ class KegControl extends React.Component {
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
       buttonText = "Return to Keg List";
-    } else if (this.state.outOfStock) {
-      currentlyVisibleState = <KegList kegList={this.state.mainKegList} onKegSelection={this.handleChangingSelectedKeg} pintControl={this.handleFillAKeg} buttonText="Fill" />;
-      buttonText = "Add Keg";
+    } else if (false) {
+      // // this.state.searchKegList = this.state.mainKegList.filter((keg) => keg.name.includes(search) || keg.brand.includes(search));
+      // currentlyVisibleState = <KegList kegList={this.state.mainKegList} onKegSelection={this.handleChangingSelectedKeg} sellAPint={this.handleSellAPint} fillAKeg={this.handleFillAKeg} />;
+      // buttonText = "Add Keg";
     } else {
-      currentlyVisibleState = <KegList kegList={this.state.mainKegList} onKegSelection={this.handleChangingSelectedKeg} pintControl={this.handleSellAPint} buttonText="Sell 1 Pint" />;
+      console.log("here");
+      currentlyVisibleState = <KegList kegList={this.state.mainKegList} onKegSelection={this.handleChangingSelectedKeg} sellAPint={this.handleSellAPint} fillAKeg={this.handleFillAKeg} />;
       buttonText = "Add Keg";
     }
     return (

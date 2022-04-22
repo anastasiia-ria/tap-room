@@ -1,13 +1,7 @@
 import React from "react";
 import { Nav, Navbar, Form, Container, Button } from "react-bootstrap";
-import KegControl from "./KegControl.js";
 
 function Header() {
-  function handleSearchFormSubmission(event) {
-    event.preventDefault();
-    new KegControl().handleSearch(event.target.search.value);
-  }
-
   return (
     <React.Fragment>
       <Navbar bg="light" expand="lg">
@@ -17,8 +11,8 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#contact">Contact</Nav.Link>
-            <Form onSubmit={handleSearchFormSubmission} className="d-flex">
-              <Form.Control type="text" placeholder="Search" className="me-2" aria-label="Search" name="search" />
+            <Form action="/" className="d-flex">
+              <Form.Control type="text" placeholder="Search" className="me-2" aria-label="Search" name="s" />
               <Button variant="outline-dark" type="submit">
                 Search
               </Button>
