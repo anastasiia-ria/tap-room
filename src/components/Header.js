@@ -6,17 +6,26 @@ function Header(props) {
   function handleSearchSubmission(event) {
     event.preventDefault();
     props.search(event.target.search.value);
+    event.target.search.value = "";
+  }
+
+  function handleBack(event) {
+    event.preventDefault();
+    props.search("");
   }
 
   return (
     <React.Fragment>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="/">Tap Room</Navbar.Brand>
+          <Navbar.Brand href="/" onClick={handleBack}>
+            Tap Room
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#contact">Contact</Nav.Link>
+            <Nav.Link href="/" onClick={handleBack}>
+              Home
+            </Nav.Link>
             <Form onSubmit={handleSearchSubmission} className="d-flex">
               <Form.Control type="text" placeholder="Search" className="me-2" aria-label="Search" name="search" />
               <Button variant="outline-dark" type="submit">
@@ -30,7 +39,7 @@ function Header(props) {
   );
 }
 
-// Header.PropTypes = {
-//   search: PropTypes.func,
-// };
+Header.propTypes = {
+  search: PropTypes.func,
+};
 export default Header;

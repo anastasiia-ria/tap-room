@@ -17,6 +17,7 @@ class App extends React.Component {
       query: query,
     });
   };
+
   render() {
     return (
       <React.Fragment>

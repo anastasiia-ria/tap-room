@@ -4,6 +4,7 @@ import NewKegForm from "./NewKegForm";
 import KegList from "./KegList";
 import KegDetail from "./KegDetail";
 import EditKegForm from "./EditKegForm";
+import PropTypes from "prop-types";
 
 class KegControl extends React.Component {
   constructor(props) {
@@ -119,13 +120,17 @@ class KegControl extends React.Component {
     }
     return (
       <React.Fragment>
-        {currentlyVisibleState}
-        <Button variant="outline-dark" onClick={this.handleClick}>
+        <Button className="mt-4 mb-4" variant="outline-dark" onClick={this.handleClick}>
           {buttonText}
         </Button>
+        {currentlyVisibleState}
       </React.Fragment>
     );
   }
 }
+
+KegControl.propTypes = {
+  query: PropTypes.string,
+};
 
 export default KegControl;

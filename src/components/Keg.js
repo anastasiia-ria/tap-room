@@ -6,13 +6,15 @@ function Keg(props) {
   return (
     <React.Fragment>
       <Card className="p-4 mb-4">
-        <div class="keg" onClick={() => props.whenKegClicked(props.id)}>
-          {/* We add a div with an onClick function. Don't forget to close out the div below! */}
+        <div className="keg" onClick={() => props.whenKegClicked(props.id)}>
           <Card.Title>{props.name}</Card.Title>
-          <Card.Text>
-            Pints: {props.pints}
-            <div class="status">{props.status}</div>
-          </Card.Text>
+          <div className="card-text">
+            <p>Brand: {props.brand}</p>
+            <p>ABV: {props.alcohol}%</p>
+            <p>Price: ${props.price}</p>
+            <p>Pints: {props.pints}</p>
+            <div className="status">{props.status}</div>
+          </div>
           <Card.Text></Card.Text>
         </div>
         <Button variant="outline-dark" onClick={() => props.pintControl(props.id)}>
