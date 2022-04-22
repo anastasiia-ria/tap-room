@@ -13,6 +13,8 @@ class KegControl extends React.Component {
       mainKegList: [],
       selectedKeg: null,
       editing: false,
+      outOfStock: false,
+      searchKegList: [],
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -22,6 +24,37 @@ class KegControl extends React.Component {
     this.setState({
       mainKegList: newMainKegList,
       formVisibleOnPage: false,
+    });
+  };
+
+  handleSellAPint = (id) => {
+    const selectedKeg = this.state.mainKegList.filter((keg) => keg.id === id)[0];
+    selectedKeg.pints--;
+
+    if (selectedKeg.pints === 0) {
+      selectedKeg.status = "Out Of Stock";
+      this.setState({
+        outOfStock: true,
+      });
+    } else if (selectedKeg.pints < 10) {
+      selectedKeg.status = "Almost Empty";
+    }
+    this.setState({
+      formVisibleOnPage: false,
+      selectedKeg: null,
+      editing: false,
+    });
+  };
+
+  handleFillAKeg = (id) => {
+    const selectedKeg = this.state.mainKegList.filter((keg) => keg.id === id)[0];
+    selectedKeg.pints = 124;
+    selectedKeg.status = "";
+    this.setState({
+      formVisibleOnPage: false,
+      selectedKeg: null,
+      editing: false,
+      outOfStock: false,
     });
   };
 
@@ -52,12 +85,20 @@ class KegControl extends React.Component {
     });
   };
 
+  handleSearch = (search) => {
+    const searchMainKegList = this.state.mainKegList.filter((keg) => keg.name.includes(search) || keg.brand.includes(search));
+    this.setState({
+      mainKegList: searchMainKegList,
+      editing: false,
+      selectedKeg: null,
+    });
+  };
   handleClick = () => {
     if (this.state.selectedKeg != null) {
       this.setState({
         formVisibleOnPage: false,
         selectedKeg: null,
-        editing: false, // new code
+        editing: false,
       });
     } else {
       this.setState((prevState) => ({
@@ -76,18 +117,21 @@ class KegControl extends React.Component {
       currentlyVisibleState = <KegDetail keg={this.state.selectedKeg} onClickingDelete={this.handleDeletingKeg} onClickingEdit={this.handleEditClick} />;
       buttonText = "Return to Keg List";
     } else if (this.state.formVisibleOnPage) {
-      // This conditional needs to be updated to "else if."
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
       buttonText = "Return to Keg List";
+    } else if (this.state.outOfStock) {
+      currentlyVisibleState = <KegList kegList={this.state.mainKegList} onKegSelection={this.handleChangingSelectedKeg} pintControl={this.handleFillAKeg} buttonText="Fill" />;
+      buttonText = "Add Keg";
     } else {
-      currentlyVisibleState = <KegList kegList={this.state.mainKegList} onKegSelection={this.handleChangingSelectedKeg} />;
-      // Because a user will actually be clicking on the keg in the Keg component, we will need to pass our new handleChangingSelectedKeg method as a prop.
+      currentlyVisibleState = <KegList kegList={this.state.mainKegList} onKegSelection={this.handleChangingSelectedKeg} pintControl={this.handleSellAPint} buttonText="Sell 1 Pint" />;
       buttonText = "Add Keg";
     }
     return (
       <React.Fragment>
         {currentlyVisibleState}
-        <Button onClick={this.handleClick}>{buttonText}</Button>
+        <Button variant="outline-dark" onClick={this.handleClick}>
+          {buttonText}
+        </Button>
       </React.Fragment>
     );
   }
