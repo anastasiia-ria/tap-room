@@ -9,7 +9,7 @@ function KegList(props) {
     <React.Fragment>
       <Row className="mb-4">
         {props.kegList.map((keg) => (
-          <Col lg="3">{keg.pints === 0 ? <Keg whenKegClicked={props.onKegSelection} pintControl={props.fillAKeg} name={keg.name} pints={keg.pints} status={keg.status} id={keg.id} key={keg.id} buttonText="Fill" /> : <Keg whenKegClicked={props.onKegSelection} pintControl={props.sellAPint} name={keg.name} pints={keg.pints} status={keg.status} id={keg.id} key={keg.id} buttonText={props.buttonText} />}</Col>
+          <Col lg="3">{keg.pints === 0 ? <Keg whenKegClicked={props.onKegSelection} pintControl={props.fillAKeg} name={keg.name} pints={keg.pints} status={keg.status} id={keg.id} key={keg.id} buttonText="Fill" /> : <Keg whenKegClicked={props.onKegSelection} pintControl={props.sellAPint} name={keg.name} pints={keg.pints} status={keg.status} id={keg.id} key={keg.id} buttonText="Sell 1 Pint" />}</Col>
         ))}
       </Row>
     </React.Fragment>

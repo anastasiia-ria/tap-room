@@ -8,7 +8,7 @@ import EditKegForm from "./EditKegForm";
 class KegControl extends React.Component {
   constructor(props) {
     super(props);
-    this.state = JSON.parse(window.localStorage.getItem("state")) || {
+    this.state = {
       formVisibleOnPage: false,
       mainKegList: [],
       selectedKeg: null,
@@ -17,12 +17,6 @@ class KegControl extends React.Component {
       searching: false,
     };
     this.handleClick = this.handleClick.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
-  setState(state) {
-    window.localStorage.setItem("state", JSON.stringify(state));
-    super.setState(state);
   }
 
   handleAddingNewKegToList = (newKeg) => {
@@ -87,14 +81,6 @@ class KegControl extends React.Component {
     });
   };
 
-  handleSearch = (search) => {
-    console.log(search);
-    const searchResult = this.state.mainKegList.filter((keg) => keg.name.includes(search) || keg.brand.includes(search));
-    this.setState({
-      searchKegList: searchResult,
-    });
-  };
-
   handleClick = () => {
     if (this.state.selectedKeg != null) {
       this.setState({
@@ -112,9 +98,7 @@ class KegControl extends React.Component {
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
-    // const { search } = window.location;
-    // const query = new URLSearchParams(search).get("s");
-    // console.log(query);
+    let search = this.props.query;
     if (this.state.editing) {
       currentlyVisibleState = <EditKegForm keg={this.state.selectedKeg} onEditKeg={this.handleEditingKegInList} />;
       buttonText = "Return to Keg List";
@@ -124,12 +108,12 @@ class KegControl extends React.Component {
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
       buttonText = "Return to Keg List";
-    } else if (false) {
-      // // this.state.searchKegList = this.state.mainKegList.filter((keg) => keg.name.includes(search) || keg.brand.includes(search));
-      // currentlyVisibleState = <KegList kegList={this.state.mainKegList} onKegSelection={this.handleChangingSelectedKeg} sellAPint={this.handleSellAPint} fillAKeg={this.handleFillAKeg} />;
-      // buttonText = "Add Keg";
+    } else if (search !== "") {
+      console.log(search);
+      this.state.searchKegList = this.state.mainKegList.filter((keg) => keg.name.includes(search) || keg.brand.includes(search));
+      currentlyVisibleState = <KegList kegList={this.state.searchKegList} onKegSelection={this.handleChangingSelectedKeg} sellAPint={this.handleSellAPint} fillAKeg={this.handleFillAKeg} />;
+      buttonText = "Add Keg";
     } else {
-      console.log("here");
       currentlyVisibleState = <KegList kegList={this.state.mainKegList} onKegSelection={this.handleChangingSelectedKeg} sellAPint={this.handleSellAPint} fillAKeg={this.handleFillAKeg} />;
       buttonText = "Add Keg";
     }

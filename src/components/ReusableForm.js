@@ -19,7 +19,7 @@ function ReusableForm(props) {
         <Form.Group className="mb-3">
           <Form.Control type="number" name="alcohol" placeholder="Alcohol Content" />
         </Form.Group>
-        <Button className="mb-3" type="submit">
+        <Button variant="outline-dark" className="mb-3" type="submit">
           {props.buttonText}
         </Button>
       </Form>

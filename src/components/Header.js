@@ -1,7 +1,13 @@
 import React from "react";
 import { Nav, Navbar, Form, Container, Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 
-function Header() {
+function Header(props) {
+  function handleSearchSubmission(event) {
+    event.preventDefault();
+    props.search(event.target.search.value);
+  }
+
   return (
     <React.Fragment>
       <Navbar bg="light" expand="lg">
@@ -11,8 +17,8 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#contact">Contact</Nav.Link>
-            <Form action="/" className="d-flex">
-              <Form.Control type="text" placeholder="Search" className="me-2" aria-label="Search" name="s" />
+            <Form onSubmit={handleSearchSubmission} className="d-flex">
+              <Form.Control type="text" placeholder="Search" className="me-2" aria-label="Search" name="search" />
               <Button variant="outline-dark" type="submit">
                 Search
               </Button>
@@ -24,4 +30,7 @@ function Header() {
   );
 }
 
+// Header.PropTypes = {
+//   search: PropTypes.func,
+// };
 export default Header;
