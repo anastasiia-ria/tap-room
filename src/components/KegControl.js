@@ -69,7 +69,6 @@ class KegControl extends React.Component {
   };
 
   handleEditClick = () => {
-    console.log("handleEditClick reached!");
     this.setState({ editing: true });
   };
 
@@ -110,7 +109,6 @@ class KegControl extends React.Component {
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
       buttonText = "Return to Keg List";
     } else if (search !== "") {
-      console.log(search);
       this.state.searchKegList = this.state.mainKegList.filter((keg) => keg.name.includes(search) || keg.brand.includes(search));
       currentlyVisibleState = <KegList kegList={this.state.searchKegList} onKegSelection={this.handleChangingSelectedKeg} sellAPint={this.handleSellAPint} fillAKeg={this.handleFillAKeg} />;
       buttonText = "Add Keg";

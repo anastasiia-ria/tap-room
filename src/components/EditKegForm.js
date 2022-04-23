@@ -7,12 +7,12 @@ function EditKegForm(props) {
 
   function handleEditKegFormSubmission(event) {
     event.preventDefault();
-    props.onEditKeg({ name: event.target.name.value, brand: event.target.brand.value, price: event.target.price.value, alcohol: event.target.price.alcohol, pints: keg.pints, id: keg.id });
+    props.onEditKeg({ name: event.target.name.value, brand: event.target.brand.value, price: event.target.price.value, alcohol: event.target.alcohol.value, pints: keg.pints, id: keg.id });
   }
 
   return (
     <React.Fragment>
-      <ReusableForm formSubmissionHandler={handleEditKegFormSubmission} buttonText="Update Keg" />
+      <ReusableForm formSubmissionHandler={handleEditKegFormSubmission} buttonText="Update Keg" name={keg.name} brand={keg.brand} price={keg.price} alcohol={keg.alcohol} />
     </React.Fragment>
   );
 }

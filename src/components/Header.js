@@ -26,7 +26,7 @@ function Header(props) {
             <Nav.Link href="/" onClick={handleBack}>
               Home
             </Nav.Link>
-            <Form onSubmit={handleSearchSubmission} className="d-flex">
+            <Form onSubmit={handleSearchSubmission} className="d-flex search-bar">
               <Form.Control type="text" placeholder="Search" className="me-2" aria-label="Search" name="search" />
               <Button variant="outline-dark" type="submit">
                 Search
