@@ -15,7 +15,7 @@
 
 ## Description
 
-![Site Diagram](public/diagram.png)
+![Site Diagram](diagram.png)
 Tap Room allows bar to track their kegs.
 
 ## Setup/Installation Requirements
@@ -43,7 +43,7 @@ Tap Room allows bar to track their kegs.
 
 ## Known Bugs
 
--
+- Home Navigation works only when user wants to reset search parameters
 
 ## License
 
