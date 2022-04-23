@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/tap-room/static/css/main.ce86de99.chunk.css",
+    "main.js": "/tap-room/static/js/main.0abcb187.chunk.js",
+    "main.js.map": "/tap-room/static/js/main.0abcb187.chunk.js.map",
+    "runtime-main.js": "/tap-room/static/js/runtime-main.cfe986ab.js",
+    "runtime-main.js.map": "/tap-room/static/js/runtime-main.cfe986ab.js.map",
+    "static/css/2.68a81a89.chunk.css": "/tap-room/static/css/2.68a81a89.chunk.css",
+    "static/js/2.8e480f1a.chunk.js": "/tap-room/static/js/2.8e480f1a.chunk.js",
+    "static/js/2.8e480f1a.chunk.js.map": "/tap-room/static/js/2.8e480f1a.chunk.js.map",
+    "static/js/3.19d4de79.chunk.js": "/tap-room/static/js/3.19d4de79.chunk.js",
+    "static/js/3.19d4de79.chunk.js.map": "/tap-room/static/js/3.19d4de79.chunk.js.map",
+    "index.html": "/tap-room/index.html",
+    "precache-manifest.9de1b2be3a3758d6297b7da3056419f0.js": "/tap-room/precache-manifest.9de1b2be3a3758d6297b7da3056419f0.js",
+    "service-worker.js": "/tap-room/service-worker.js",
+    "static/css/2.68a81a89.chunk.css.map": "/tap-room/static/css/2.68a81a89.chunk.css.map",
+    "static/css/main.ce86de99.chunk.css.map": "/tap-room/static/css/main.ce86de99.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cfe986ab.js",
+    "static/css/2.68a81a89.chunk.css",
+    "static/js/2.8e480f1a.chunk.js",
+    "static/css/main.ce86de99.chunk.css",
+    "static/js/main.0abcb187.chunk.js"
+  ]
+}
